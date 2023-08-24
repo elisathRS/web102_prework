@@ -28,17 +28,22 @@ const gamesContainer = document.getElementById("games-container");
 // create a function that adds all data from the games array to the page
 function addGamesToPage(games) {
 
+    // loop over each item in the data
     for (const game of games) {
+         // create a new div element, which will become the game card
         const gameCard = document.createElement("div");
+       
+        // add the class game-card to the list
         gameCard.classList.add("game-card");
-        
+    
         const gameImage = document.createElement("img");
         gameImage.src = game.img; // Include the image source
         gameImage.alt = game.name;
         gameImage.classList.add("game-img");
         gameCard.appendChild(gameImage); // Append the image
         
-        // Add the rest of the game details
+         // set the inner HTML using a template literal to display some info 
+        // about each game
         gameCard.innerHTML += `
             <h2>${game.name}</h2>
             <p>${game.description}</p>
@@ -46,25 +51,9 @@ function addGamesToPage(games) {
             <p>Pledged: $${game.pledged.toLocaleString()}</p>
             <p>Goal: $${game.goal.toLocaleString()}</p>
         `;
-        
-        gamesContainer.appendChild(gameCard);
-    }
-    // loop over each item in the data
-
-
-        // create a new div element, which will become the game card
-
-
-        // add the class game-card to the list
-
-
-        // set the inner HTML using a template literal to display some info 
-        // about each game
-        // TIP: if your images are not displaying, make sure there is space
-        // between the end of the src attribute and the end of the tag ("/>")
-
-
         // append the game to the games-container
+        gamesContainer.appendChild(gameCard);
+    }       
 
 }
 
@@ -150,6 +139,8 @@ function showAllGames() {
 
 }
 
+showAllGames()
+
 // select each button in the "Our Games" section
 const unfundedBtn = document.getElementById("unfunded-btn");
 const fundedBtn = document.getElementById("funded-btn");
@@ -200,18 +191,12 @@ const sortedGames =  GAMES_JSON.sort( (item1, item2) => {
 // use destructuring and the spread operator to grab the first and second games
 const [firstGame, secondGame, ...remainingGames] = sortedGames;
 
+// create a new element to hold the name of the top pledge game, then append it to the correct element
 const firstGameNameElement = document.createElement("p");
 firstGameNameElement.textContent = `1. ${firstGame.name}`;
-
-const secondGameNameElement = document.createElement("p");
-secondGameNameElement.textContent = `2. ${secondGame.name}`;
-
-// Append the top 2 game name elements to their respective containers
 firstGameContainer.appendChild(firstGameNameElement);
-secondGameContainer.appendChild(secondGameNameElement);
-
-
-
-// create a new element to hold the name of the top pledge game, then append it to the correct element
 
 // do the same for the runner up item
+const secondGameNameElement = document.createElement("p");
+secondGameNameElement.textContent = `2. ${secondGame.name}`;
+secondGameContainer.appendChild(secondGameNameElement);
